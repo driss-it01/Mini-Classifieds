@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('title');
+            $table->text('description');
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('location')->nullable();
+            $table->string('image')->nullable(); // store path in storage
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
